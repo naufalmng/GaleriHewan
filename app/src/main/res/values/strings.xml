@@ -3,4 +3,6 @@
     <string name="lanjut">lanjut</string>
     <string name="kembali">kembali</string>
     <string name="kambing">Kambing</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
