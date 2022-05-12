@@ -47,9 +47,9 @@ class MainAdapter(): RecyclerView.Adapter<MainAdapter.MainViewHolder>(),Filterab
         holder.binding.namaLatin.text = hewanFilterList[position].namaLatin
         holder.binding.jenisHewan.text = hewanFilterList[position].jenisHewan
         holder.binding.imageView.setImageResource(hewanFilterList[position].imgResId)
-        holder.itemView.setOnClickListener {
-            onItemClick!!.invoke(hewanFilterList[position])
-        }
+//        holder.itemView.setOnClickListener {
+//            onItemClick!!.invoke(hewanFilterList[position])
+//        }
     }
 
     override fun getItemCount(): Int {

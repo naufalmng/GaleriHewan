@@ -46,12 +46,11 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        mainAdapter = MainAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainAdapter = MainAdapter()
         setupSearchViewFilter()
         updateRecyclerViewItem()
         setupObservers()
@@ -84,18 +83,18 @@ class MainFragment : Fragment() {
         })
     }
 
-    private fun onHewanItemClick() {
-        mainAdapter.onItemClick = {
-                data ->
-            Toast.makeText(requireContext(), data.nama, Toast.LENGTH_SHORT).show()
-//            val intent = Intent(requireActivity(), DetailActivity::class.java)
-//            intent.putExtra(NAMA_HEWAN,data.nama)
-//            intent.putExtra(NAMA_LATIN_HEWAN,data.namaLatin)
-//            intent.putExtra(JENIS_HEWAN,data.jenisHewan)
-//            intent.putExtra(FOTO_HEWAN,data.imgResId)
-//            startActivity(intent)
-        }
-    }
+//    private fun onHewanItemClick() {
+//        mainAdapter.onItemClick = {
+//                data ->
+//            Toast.makeText(requireContext(), data.nama, Toast.LENGTH_SHORT).show()
+////            val intent = Intent(requireActivity(), DetailActivity::class.java)
+////            intent.putExtra(NAMA_HEWAN,data.nama)
+////            intent.putExtra(NAMA_LATIN_HEWAN,data.namaLatin)
+////            intent.putExtra(JENIS_HEWAN,data.jenisHewan)
+////            intent.putExtra(FOTO_HEWAN,data.imgResId)
+////            startActivity(intent)
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

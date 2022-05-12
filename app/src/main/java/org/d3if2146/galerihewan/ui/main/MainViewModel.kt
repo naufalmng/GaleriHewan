@@ -59,7 +59,6 @@ class MainViewModel : ViewModel() {
             R.drawable.kalkun,
             R.drawable.kambing,
             R.drawable.kelinci,
-            R.drawable.kelinci,
             R.drawable.kerbau,
             R.drawable.kuda,
             R.drawable.sapi
