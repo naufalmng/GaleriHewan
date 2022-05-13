@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.d3if2146.galerihewan.R
 import org.d3if2146.galerihewan.adapter.MainAdapter
 import org.d3if2146.galerihewan.databinding.FragmentMainBinding
 
@@ -25,6 +28,7 @@ class MainFragment : Fragment() {
     private val mainViewModel: MainViewModel by lazy{
         ViewModelProvider(this)[MainViewModel::class.java]
     }
+    private var isLinearLayoutManager = true
 
     private lateinit var mainAdapter: MainAdapter
     override fun onCreateView(
@@ -40,6 +44,7 @@ class MainFragment : Fragment() {
             isNestedScrollingEnabled = true
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         }
+        setHasOptionsMenu(true)
         return binding.root
 
     }
@@ -55,8 +60,39 @@ class MainFragment : Fragment() {
         updateRecyclerViewItem()
         setupObservers()
 
+
 //        onHewanItemClick()
      }
+
+    private fun setupLayoutSwitcher() {
+        if(isLinearLayoutManager) binding.recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
+        else binding.recyclerView.layoutManager = GridLayoutManager(this.requireContext(),2)
+    }
+
+    private fun setLayoutSwitcherIcon(menuItem: MenuItem?){
+        if(menuItem== null) return
+
+        menuItem.icon = if(isLinearLayoutManager) ContextCompat.getDrawable(requireContext(),R.drawable.ic_linear_layout)
+        else ContextCompat.getDrawable(requireContext(),R.drawable.ic_grid_layout)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.layout_menu,menu)
+        val layoutBtn = menu.findItem(R.id.action_switch_layout)
+        setLayoutSwitcherIcon(layoutBtn)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_switch_layout -> {
+                isLinearLayoutManager = !isLinearLayoutManager
+                setupLayoutSwitcher()
+                setLayoutSwitcherIcon(item)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     private fun setupObservers() {
         mainViewModel.getData().observe(viewLifecycleOwner){
