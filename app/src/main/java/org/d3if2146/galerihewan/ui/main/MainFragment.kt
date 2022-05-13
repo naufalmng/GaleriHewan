@@ -7,12 +7,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 import org.d3if2146.galerihewan.R
 import org.d3if2146.galerihewan.adapter.MainAdapter
+import org.d3if2146.galerihewan.data.DataStoreSettings
+import org.d3if2146.galerihewan.data.dataStore
 import org.d3if2146.galerihewan.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -29,6 +34,7 @@ class MainFragment : Fragment() {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
     private var isLinearLayoutManager = true
+    private lateinit var layoutDataStore: DataStoreSettings
 
     private lateinit var mainAdapter: MainAdapter
     override fun onCreateView(
@@ -59,10 +65,22 @@ class MainFragment : Fragment() {
         setupSearchViewFilter()
         updateRecyclerViewItem()
         setupObservers()
+        setupLayoutDataStore()
 
 
 //        onHewanItemClick()
      }
+
+    private fun setupLayoutDataStore() {
+        layoutDataStore = DataStoreSettings(requireContext().dataStore)
+        layoutDataStore.preferenceFlow.asLiveData()
+            .observe(viewLifecycleOwner){value->
+                isLinearLayoutManager = value
+                setupLayoutSwitcher()
+                activity?.invalidateOptionsMenu()
+
+            }
+    }
 
     private fun setupLayoutSwitcher() {
         if(isLinearLayoutManager) binding.recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
@@ -86,6 +104,11 @@ class MainFragment : Fragment() {
         return when(item.itemId){
             R.id.action_switch_layout -> {
                 isLinearLayoutManager = !isLinearLayoutManager
+
+                lifecycleScope.launch {
+                    layoutDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager,requireContext())
+                }
+
                 setupLayoutSwitcher()
                 setLayoutSwitcherIcon(item)
                 true
