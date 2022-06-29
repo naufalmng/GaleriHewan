@@ -3,30 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/brown"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.AboutFragment">
+    tools:context=".ui.about.AboutFragment">
 
-    <androidx.cardview.widget.CardView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="1:1"
         android:layout_marginTop="32dp"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.440"
-        app:cardCornerRadius="200dp"
+        android:src="@drawable/foto"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@drawable/foto" />
-
-    </androidx.cardview.widget.CardView>
+    </de.hdodenhof.circleimageview.CircleImageView>
 
 
 
@@ -36,7 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/nama"
-        android:layout_margin="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView"

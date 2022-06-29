@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:padding="16dp"
+    android:background="@color/brown"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.DetailFragment">
+    tools:context=".ui.detail.DetailFragment">
 
     <ImageView
         android:id="@+id/ivHewan"
@@ -29,12 +30,14 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvNamaHewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:text="@string/nama_hewan_arg"/>
         <TextView
+            android:id="@+id/tvNamaLatin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -42,6 +45,7 @@
             android:textSize="22sp"
             android:text="@string/nama_latin_arg"/>
         <TextView
+            android:id="@+id/tvJenisHewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"

@@ -3,19 +3,19 @@ package org.d3if2146.galerihewan.ui.main
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import org.d3if2146.galerihewan.R
-import org.d3if2146.galerihewan.adapter.MainAdapter
+import org.d3if2146.galerihewan.ui.adapter.MainAdapter
 import org.d3if2146.galerihewan.data.DataStoreSettings
 import org.d3if2146.galerihewan.data.dataStore
 import org.d3if2146.galerihewan.databinding.FragmentMainBinding
@@ -43,13 +43,6 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        with(binding.recyclerView){
-            adapter = mainAdapter
-            addItemDecoration(DividerItemDecoration(context,RecyclerView.VERTICAL))
-            setHasFixedSize(true)
-            isNestedScrollingEnabled = true
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
-        }
         setHasOptionsMenu(true)
         return binding.root
 
@@ -57,28 +50,21 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainAdapter = MainAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSearchViewFilter()
-        updateRecyclerViewItem()
-        setupObservers()
         setupLayoutDataStore()
-
-
-//        onHewanItemClick()
      }
-
     private fun setupLayoutDataStore() {
         layoutDataStore = DataStoreSettings(requireContext().dataStore)
         layoutDataStore.preferenceFlow.asLiveData()
             .observe(viewLifecycleOwner){value->
                 isLinearLayoutManager = value
                 setupLayoutSwitcher()
+                setupObservers()
                 activity?.invalidateOptionsMenu()
-
             }
     }
 
@@ -95,7 +81,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.layout_menu,menu)
+        inflater.inflate(R.menu.option_menu,menu)
         val layoutBtn = menu.findItem(R.id.action_switch_layout)
         setLayoutSwitcherIcon(layoutBtn)
     }
@@ -104,13 +90,16 @@ class MainFragment : Fragment() {
         return when(item.itemId){
             R.id.action_switch_layout -> {
                 isLinearLayoutManager = !isLinearLayoutManager
-
                 lifecycleScope.launch {
                     layoutDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager,requireContext())
                 }
-
+                setupObservers()
                 setupLayoutSwitcher()
                 setLayoutSwitcherIcon(item)
+                true
+            }
+            R.id.menu_about -> {
+                findNavController().navigate(R.id.action_mainFragment_to_aboutFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -119,12 +108,14 @@ class MainFragment : Fragment() {
 
     private fun setupObservers() {
         mainViewModel.getData().observe(viewLifecycleOwner){
-            mainAdapter.updateData(it)
+            mainAdapter = MainAdapter(it,isLinearLayoutManager)
+            with(binding.recyclerView){
+                adapter = mainAdapter
+                setHasFixedSize(true)
+                isNestedScrollingEnabled = true
+            }
+            setupOnItemClick()
         }
-    }
-
-    private fun updateRecyclerViewItem() {
-
     }
 
 
@@ -142,18 +133,12 @@ class MainFragment : Fragment() {
         })
     }
 
-//    private fun onHewanItemClick() {
-//        mainAdapter.onItemClick = {
-//                data ->
-//            Toast.makeText(requireContext(), data.nama, Toast.LENGTH_SHORT).show()
-////            val intent = Intent(requireActivity(), DetailActivity::class.java)
-////            intent.putExtra(NAMA_HEWAN,data.nama)
-////            intent.putExtra(NAMA_LATIN_HEWAN,data.namaLatin)
-////            intent.putExtra(JENIS_HEWAN,data.jenisHewan)
-////            intent.putExtra(FOTO_HEWAN,data.imgResId)
-////            startActivity(intent)
-//        }
-//    }
+    private fun setupOnItemClick() {
+        mainAdapter.onItemClick = {
+                data ->
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(data))
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

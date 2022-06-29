@@ -1,4 +1,4 @@
-package org.d3if2146.galerihewan.ui
+package org.d3if2146.galerihewan.ui.about
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -5,10 +5,10 @@
     <string name="kambing">Kambing</string>
     <string name="nama"><b>Nama:</b> Muhammad Naufal Hanif</string>
     <string name="email"><b>Email:</b> naufalmng@gmail.com</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about">About</string>
-    <string name="nama_hewan_arg">Nama Hewan: %1$s</string>
-    <string name="nama_latin_arg">Nama Latin: %1$s</string>
-    <string name="jenis_hewan_arg">Jenis Hewan: %1$s</string>
+    <string name="nama_hewan_arg"><b>Nama Hewan:</b> %1$s</string>
+    <string name="nama_latin_arg"><b>Nama Latin:</b> %1$s</string>
+    <string name="jenis_hewan_arg"><b>Jenis Hewan:</b> %1$s</string>
+    <string name="action_switch_layout">Action Switch Layout</string>
 </resources>
