@@ -33,14 +33,14 @@
             android:id="@+id/tvNamaHewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="22sp"
             android:text="@string/nama_hewan_arg"/>
         <TextView
             android:id="@+id/tvNamaLatin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginTop="8dp"
             android:textSize="22sp"
             android:text="@string/nama_latin_arg"/>
@@ -48,7 +48,7 @@
             android:id="@+id/tvJenisHewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginTop="8dp"
             android:textSize="22sp"
             android:text="@string/jenis_hewan_arg"/>

@@ -2,9 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.GaleriHewan" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/brown2</item>
-        <item name="colorPrimaryVariant">@color/brown2</item>
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryVariant">@color/brown</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/dark_brown</item>
         <item name="colorSecondaryVariant">@color/dark_brown</item>

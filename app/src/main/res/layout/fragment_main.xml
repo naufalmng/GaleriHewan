@@ -12,6 +12,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:queryBackground="@null"
+        android:focusable="false"
+        android:queryBackground="@null"
+        android:focusableInTouchMode="true"
+        android:iconifiedByDefault="false"
+        android:searchHintIcon="@drawable/ic_search"
+        android:closeIcon="@drawable/ic_close"
+        android:searchIcon="@drawable/ic_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

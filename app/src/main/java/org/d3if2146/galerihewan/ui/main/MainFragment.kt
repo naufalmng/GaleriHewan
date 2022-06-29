@@ -48,14 +48,10 @@ class MainFragment : Fragment() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSearchViewFilter()
         setupLayoutDataStore()
+        setupObservers()
      }
     private fun setupLayoutDataStore() {
         layoutDataStore = DataStoreSettings(requireContext().dataStore)
@@ -64,6 +60,7 @@ class MainFragment : Fragment() {
                 isLinearLayoutManager = value
                 setupLayoutSwitcher()
                 setupObservers()
+                setupSearchViewFilter()
                 activity?.invalidateOptionsMenu()
             }
     }
