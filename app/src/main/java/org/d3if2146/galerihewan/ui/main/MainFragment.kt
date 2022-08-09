@@ -16,17 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import org.d3if2146.galerihewan.R
 import org.d3if2146.galerihewan.ui.adapter.MainAdapter
-import org.d3if2146.galerihewan.data.DataStoreSettings
-import org.d3if2146.galerihewan.data.dataStore
 import org.d3if2146.galerihewan.databinding.FragmentMainBinding
+import org.d3if2146.galerihewan.utils.DataStoreSettings
+import org.d3if2146.galerihewan.utils.dataStore
 
 class MainFragment : Fragment() {
-    companion object {
-        const val  NAMA_HEWAN = "org.d3if2146.galerihewan.namaHewan"
-        const val  NAMA_LATIN_HEWAN = "org.d3if2146.galerihewan.namaLatin"
-        const val  JENIS_HEWAN = "org.d3if2146.galerihewan.jenisHewan"
-        const val  FOTO_HEWAN = "org.d3if2146.galerihewan.fotoHewan"
-    }
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -47,6 +41,7 @@ class MainFragment : Fragment() {
         return binding.root
 
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

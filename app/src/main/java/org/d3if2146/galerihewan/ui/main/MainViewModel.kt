@@ -36,7 +36,6 @@ class MainViewModel : ViewModel() {
             "Oryctolagus cuniculus",
             "Bubalus bubalis",
             "Equus caballus",
-            "Sapi",
             "Bos taurus"
         )
         val jenisHewan = arrayOf(

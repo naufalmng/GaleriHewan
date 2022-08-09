@@ -56,12 +56,13 @@ class MainAdapter(private val newData: ArrayList<Hewan>,private val isLinearLayo
             }
         }
         fun bind(position: Int,data: ArrayList<Hewan>,onItemClick: ((Hewan) -> Unit)){
+            val (nama,namaLatin,jenisHewan,imgResId) = data[position]
             with(binding){
                 cardView.setOnClickListener{
                     onItemClick.invoke(data[position])
                 }
-                nama.text = data[position].nama
-                imageView.setImageResource(data[position].imgResId)
+                this.nama.text = nama
+                imageView.setImageResource(imgResId)
             }
         }
     }
